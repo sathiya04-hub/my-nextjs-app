@@ -5,37 +5,38 @@ import path from "path";
 export async function POST(req) {
   try {
     const formData = await req.formData();
-    const file = formData.get("file");
+    const files = formData.getAll("file"); // get all files
 
-    if (!file) {
+    if (!files || files.length === 0) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    const uploadedFiles = [];
 
-    if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json(
-        { error: "Only jpg, png, gif allowed" },
-        { status: 400 }
-      );
+    for (const file of files) {
+      if (!allowedTypes.includes(file.type)) {
+        return NextResponse.json(
+          { error: `File ${file.name} not allowed` },
+          { status: 400 }
+        );
+      }
+
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      const filename = Date.now() + "-" + file.name;
+      const filepath = path.join(process.cwd(), "public/uploads", filename);
+
+      await writeFile(filepath, buffer);
+      uploadedFiles.push(`/uploads/${filename}`);
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    const filename = Date.now() + "-" + file.name;
-    const filepath = path.join(process.cwd(), "public/uploads", filename);
-
-    await writeFile(filepath, buffer);
-
     return NextResponse.json({
-      message: "Upload successful",
-      url: `/uploads/${filename}`,
+      message: "Files uploaded successfully",
+      files: uploadedFiles,
     });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Upload failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 }

@@ -10,7 +10,6 @@ export default function ItemsPage() {
   const observer = useRef();
 
   const fetchItems = async (pageNum) => {
-    //const res = await fetch("/data.json");
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`);
     const data = await res.json();
 

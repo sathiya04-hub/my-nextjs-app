@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q");
@@ -14,5 +16,5 @@ export async function GET(req) {
     item.name.toLowerCase().includes(q.toLowerCase())
   );
 
-  return Response.json(results);
+  return NextResponse.json(results);
 }

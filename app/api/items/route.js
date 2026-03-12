@@ -9,11 +9,3 @@ export async function GET(request) {
 
   return NextResponse.json(items);
 }
-
-export async function POST(request) {
-  const body = await request.json();
-  return NextResponse.json({
-    message: "POST request successful",
-    data: body
-  });
-}

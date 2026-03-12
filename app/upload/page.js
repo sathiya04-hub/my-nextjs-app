@@ -3,30 +3,36 @@
 import { useState } from "react";
 
 export default function UploadPage() {
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState("");
-  const [uploadedUrl, setUploadedUrl] = useState("");
+  const [files, setFiles] = useState([]); // store multiple files
+  const [previews, setPreviews] = useState([]); // store previews
+  const [uploadedUrls, setUploadedUrls] = useState([]);
 
-  const handleFileChange = (e) => {
+  // handle file input change
+  const handleFileChange = (e, index) => {
     const selectedFile = e.target.files[0];
-
     if (!selectedFile) return;
 
-    setFile(selectedFile);
+    // store file in files array
+    const updatedFiles = [...files];
+    updatedFiles[index] = selectedFile;
+    setFiles(updatedFiles);
 
-    // preview
-    const imageUrl = URL.createObjectURL(selectedFile);
-    setPreview(imageUrl);
+    // create preview
+    const updatedPreviews = [...previews];
+    updatedPreviews[index] = URL.createObjectURL(selectedFile);
+    setPreviews(updatedPreviews);
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      alert("Please select a file");
+    if (files.length === 0) {
+      alert("Please select at least one file");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", file);
+    files.forEach((file) => {
+      if (file) formData.append("file", file);
+    });
 
     const res = await fetch("/api/upload", {
       method: "POST",
@@ -36,49 +42,56 @@ export default function UploadPage() {
     const data = await res.json();
 
     if (res.ok) {
-      setUploadedUrl(data.url);
+      setUploadedUrls(data.files || [data.url]);
     } else {
-      alert(data.message);
+      alert(data.error || "Upload failed");
     }
   };
 
   return (
     <div className="container">
-        <div className="box shadow p-4 mt-3">
-          <h1 className="text-primary">Next.js API route /api/upload that:</h1>    
-          <h2 className="text-primary">
-            <ul>
-              <li>Accepts file uploads using multipart/form-data.</li>
-              <li>Validates the file type (allow only images: jpg, png, gif).</li>
-              <li>Saves the uploaded file to a local folder /public/uploads.</li>
-              <li>Returns the file URL or an error message.</li>
-            </ul>
-          </h2>
-           
-          <div className="mb-3">
-            <input className="form-control" type="file" accept="image/*" onChange={handleFileChange} />
+      <div className="box shadow p-4 mt-3">
+        <h1 className="text-primary">Upload Multiple Images</h1>
+
+        {[0, 1].map((index) => (
+          <div className="mb-3" key={index}>
+            <input
+              className="form-control"
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, index)}
+            />
           </div>
-          <div className="mb-3">
-            {preview && (
-              <div>
-                <h3>Preview</h3>
-                <img src={preview} width="250" />
-              </div>
-            )}
-          </div>
-          <div className="mb-3">
-            <button className="btn btn-primary"  onClick={handleUpload}>Upload</button>
-          </div>
-          <div className="mb-3">
-            {uploadedUrl && (
-              <div>
-                <h3>Uploaded Image</h3>
-                <img src={uploadedUrl} width="250" />
-                <p>{uploadedUrl}</p>
-              </div>
-            )}
-          </div>
+        ))}
+
+        <div className="mb-3">
+          {previews.map(
+            (preview, index) =>
+              preview && (
+                <div key={index}>
+                  <h3>Preview {index + 1}</h3>
+                  <img src={preview} width="250" />
+                </div>
+              )
+          )}
         </div>
+
+        <div className="mb-3">
+          <button className="btn btn-primary" onClick={handleUpload}>
+            Upload
+          </button>
+        </div>
+
+        <div className="mb-3">
+          {uploadedUrls.map((url, index) => (
+            <div key={index}>
+              <h3>Uploaded Image {index + 1}</h3>
+              <img src={url} width="250" />
+              <p>{url}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
