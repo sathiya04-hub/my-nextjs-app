@@ -37,8 +37,10 @@ export default function CalculatorPage() {
 
   return (
     <div className="container">
+        <div className="box shadow p-4 mt-3">     
+            <h2 className="text-primary">Next.js API route /api/calc that accepts two numbers (a, b) and an operator (+, -, *, /). Return the result or an error message.</h2>
+        </div>
         <div className="box shadow p-4 mt-3">
-            <h1 className="text-primary">Next.js API route /api/calc that accepts two numbers (a, b) and an operator (+, -, *, /). Return the result or an error message.</h1>
             <div className="row d-flex">
                 <div className="col-12 mb-3">
                     <input

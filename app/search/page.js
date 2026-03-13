@@ -30,8 +30,11 @@ export default function Search() {
 
   return (
     <div className="container">
+        <div className="box shadow p-4 mt-3">     
+          <h1 className="text-primary">Search input that triggers API calls only after the user stops typing for 500ms.</h1>
+        </div>
         <div className="box shadow p-4 mt-3">
-            <h1 className="text-primary">Search input that triggers API calls only after the user stops typing for 500ms.</h1>
+            
             <input
                 className="form-control"
                 type="text"

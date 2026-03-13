@@ -15,8 +15,10 @@ export default function PaginationPage() {
 
   return (
     <div className="container">
+        <div className="box shadow p-4 mt-3">     
+          <h2 className="text-primary">Display a list of 100 items with 10 items per page and page navigation.</h2>
+        </div>
         <div className="box shadow p-4 mt-3">
-            <h1 className="text-primary">Display a list of 100 items with 10 items per page and page navigation.</h1>    
 
             <ul>
                 {currentItems.map((item, index) => (

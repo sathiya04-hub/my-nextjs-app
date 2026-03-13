@@ -3,11 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="container">
-        <div className="d-flex align-center">
-          <h1 className="primary">
-            Home
-          </h1>
-        </div>
+        
     </div>
   );
 }

@@ -33,8 +33,10 @@ export default function LoginPage() {
 
   return (
         <div className="container">
+          <div className="box shadow p-4 mt-3">     
+            <h2 className="text-primary">Login API route /api/login that validates hardcoded credentials (admin / password) and returns a JWT.</h2>
+          </div>
           <div className="box shadow p-4 mt-3">
-            <h1 className="text-primary">Login API route /api/login that validates hardcoded credentials (admin / password) and returns a JWT.</h1>    
             <form onSubmit={handleLogin} className="box shadow p-4 mt-4">
               <div className="mb-3">
                 <label className="form-label">Username</label>

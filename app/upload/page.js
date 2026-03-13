@@ -50,9 +50,19 @@ export default function UploadPage() {
 
   return (
     <div className="container">
-      <div className="box shadow p-4 mt-3">
-        <h1 className="text-primary">Upload Multiple Images</h1>
+      <div className="box shadow p-4 mt-3">     
+        <h2 className="text-primary">Next.js API route /api/upload that:</h2>
+        <h3 className="text-primary">
+          <ul>
+            <li>Accepts file uploads using multipart/form-data</li>
+            <li>Validates the file type (allow only images: jpg, png, gif)</li>
+            <li>Saves the uploaded file to a local folder /public/uploads</li>
+            <li>Returns the file URL or an error message</li>
 
+          </ul>
+        </h3>
+      </div>
+      <div className="box shadow p-4 mt-3">       
         {[0, 1].map((index) => (
           <div className="mb-3" key={index}>
             <input

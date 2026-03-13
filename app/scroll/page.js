@@ -43,9 +43,10 @@ export default function ItemsPage() {
 
   return (
     <div className="container">
-        <div className="box shadow p-4 mt-3">
+        <div className="box shadow p-4 mt-3">     
           <h2 className="text-primary">Next.js page that fetches items from /api/items and implements infinite scrolling. When the user scrolls near the bottom, fetch the next page of items and append to the list.</h2>
-
+        </div>
+        <div className="box shadow p-4 mt-3">       
           <ul>
             {items.map((item, index) => {
               if (items.length === index + 1) {
