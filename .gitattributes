@@ -1,1 +1,1 @@
-*.* linguist-language=NextJS
+*.* linguist-detectable=false
