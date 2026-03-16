@@ -1,9 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container">
-        
+    <div className="container">  
+      <Image src="/banner1.jpg" alt="banner1" width={1200} height={800} style={{ width: "100%", height: "auto" }} />
+      <Link href="/upload">
+        Go to Upload Page
+      </Link>
+
     </div>
   );
 }

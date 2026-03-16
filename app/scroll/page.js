@@ -10,7 +10,7 @@ export default function ItemsPage() {
   const observer = useRef();
 
   const fetchItems = async (pageNum) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=5`);
     const data = await res.json();
 
     if (data.length === 0) {
@@ -26,7 +26,6 @@ export default function ItemsPage() {
 
   const lastItemRef = useCallback(
     (node) => {
-      console.log("NODE "+node)
       if (!hasMore) return;
       if (observer.current) observer.current.disconnect();
 
