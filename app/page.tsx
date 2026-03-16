@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import Chatbot from "@/components/Chatbot";
+import AIChatbot from "@/components/AIChatbot";
 
 export default function Home() {
   return (
@@ -8,7 +10,10 @@ export default function Home() {
       <Link href="/upload">
         Go to Upload Page
       </Link>
+      <Chatbot />
 
+      <AIChatbot />
+      
     </div>
   );
 }
