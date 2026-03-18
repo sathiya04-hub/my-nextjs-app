@@ -58,8 +58,6 @@ export async function POST(req) {
 
 }
 
-
-
 /*
 Huggingface API
 export async function POST(req) {

@@ -1,4 +1,5 @@
-/*import nextConnect from "next-connect";
+/*
+import nextConnect from "next-connect";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
@@ -64,4 +65,5 @@ export const config = {
   },
 };
 
-export default apiRoute;*/
+export default apiRoute;
+*/
