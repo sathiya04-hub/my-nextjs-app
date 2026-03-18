@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Chatbot from "@/components/Chatbot";
 import AIChatbot from "@/components/AIChatbot";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
@@ -11,9 +12,8 @@ export default function Home() {
         Go to Upload Page
       </Link>
       <Chatbot />
-
       <AIChatbot />
-      
+      <Navbar/>
     </div>
   );
 }
