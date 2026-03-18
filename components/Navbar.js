@@ -10,26 +10,26 @@ export default function Navbar() {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li className="nav-item">
-                    <a className="nav-link" href="/pagination">Pagination</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/calc">Calculation</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/scroll">Scrolling</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/upload">Upload</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/search">Search</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="/login">Login</a>
-                  </li>
-              </ul>
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                      <a className="nav-link" href="/pagination">Pagination</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/calc">Calculation</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/scroll">Scrolling</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/upload">Upload</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/search">Search</a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
               </div>
           </div>
         </nav>
