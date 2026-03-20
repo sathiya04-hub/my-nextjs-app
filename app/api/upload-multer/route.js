@@ -1,3 +1,4 @@
+/*
 import nextConnect from "next-connect";
 import multer from "multer";
 import path from "path";
@@ -58,10 +59,11 @@ apiRoute.post((req, res) => {
   });
 });
 
-/*export const config = {
+export const config = {
   api: {
     bodyParser: false,
   },
-};*/
+};
 
 export default apiRoute;
+*/

@@ -8,21 +8,16 @@ export default function BlogPage() {
     <>
     <div className="container">
       <div className="box shadow p-4 mt-3">     
-        <h2 className="text-primary">Here's a complete example showing static content, cached dynamic content, and streaming dynamic content working together on a single page:</h2>
+        <h2 className="text-primary">Here&#39;s a complete example showing static content cached dynamic content and streaming dynamic content working together on a single page</h2>
         </div>
         <div className="box shadow p-4 mt-3"> 
           {/* Static content - prerendered automatically */}
           <header>
-            <h1>Our Blog</h1>
-            <nav>
-              <Link href="/">Home</Link> | <Link href="/about">About</Link>
-            </nav>
+            <h2 className="ms-5 text-primary">My Blog - Latest Post</h2>
           </header>
     
           {/* Cached dynamic content - included in the static shell */}
-          <BlogPosts />
-
-    
+          <BlogPosts />    
         </div>
     </div>
     </>
@@ -39,18 +34,20 @@ async function BlogPosts() {
   const posts = await res.json()
  
   return (
-    <section>
-      <h2>Latest Posts</h2>
-      <ul>
-        {posts.slice(0, 5).map((post: any) => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>
-              By {post.author} on {post.date}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <section className='mt-3'>
+      <div className="box shadow p-4 mt-3"> 
+        <ul>
+          {posts.slice(0, 5).map((post: any) => (
+            
+            <li key={post.id}>
+              <h3>{post.title}</h3>
+              <p>
+                By {post.author} on {post.date}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }
