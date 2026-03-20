@@ -6,6 +6,13 @@ export default function Search() {
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [results, setResults] = useState([]);
 
+
+  const fetchData = async () => {
+    const res = await fetch(`/api/search?q=${debouncedQuery}`);
+    const data = await res.json();
+     setResults(data);
+  };
+
   // debounce logic
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,13 +25,6 @@ export default function Search() {
   // API call after debounce
   useEffect(() => {
     if (!debouncedQuery) return;
-
-    async function fetchData() {
-      const res = await fetch(`/api/search?q=${debouncedQuery}`);
-      const data = await res.json();
-      setResults(data);
-    }
-
     fetchData();
   }, [debouncedQuery]);
 
