@@ -21,16 +21,8 @@ export default function BlogPage() {
     
           {/* Cached dynamic content - included in the static shell */}
           <BlogPosts />
+
     
-          {/* Runtime dynamic content - streams at request time */}
-          <Suspense fallback={<p>Loading your preferences...</p>}>
-            <UserPreferences />
-          </Suspense>
-    
-          {/* Mutation - server action that revalidates the cache */}
-          <Suspense fallback={<p>Loading...</p>}>
-            <CreatePost />
-          </Suspense>
         </div>
     </div>
     </>
@@ -62,37 +54,4 @@ async function BlogPosts() {
     </section>
   )
 }
- 
-// Personalized per user based on their cookie
-async function UserPreferences() {
-  const theme = (await cookies()).get('theme')?.value || 'light'
-  const favoriteCategory = (await cookies()).get('category')?.value
- 
-  return (
-    <aside>
-      <p>Your theme: {theme}</p>
-      {favoriteCategory && <p>Favorite category: {favoriteCategory}</p>}
-    </aside>
-  )
-}
- 
-// Admin-only form that creates a post and revalidates the cache
-async function CreatePost() {
-  //const isAdmin = (await cookies()).get('role')?.value === 'admin'
-  const isAdmin = true;
-  console.log(isAdmin);
-  if (!isAdmin) return null
- 
-  async function createPost(formData: FormData) {
-    'use server'
-    await db.post.create({ data: { title: formData.get('title') } })
-    updateTag('posts')
-  }
- 
-  return (
-    <form action={createPost}>
-      <input name="title" placeholder="Post title" required />
-      <button type="submit">Publish</button>
-    </form>
-  )
-}
+  

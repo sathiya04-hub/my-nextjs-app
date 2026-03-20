@@ -58,10 +58,10 @@ apiRoute.post((req, res) => {
   });
 });
 
-export const config = {
+/*export const config = {
   api: {
     bodyParser: false,
   },
-};
+};*/
 
 export default apiRoute;
