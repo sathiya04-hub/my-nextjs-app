@@ -24,3 +24,45 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.skeleton {
+      background: linear-gradient(90deg, #eee, #ddd, #eee);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+  }
+
+  .skeleton.title {
+      height: 20px;
+      width: 60%;
+      margin-bottom: 10px;
+  }
+
+  .skeleton.text {
+      height: 15px;
+      width: 80%;
+  }
+
+  @keyframes shimmer {
+      0% {
+          background-position: -200% 0;
+      }
+      100% {
+          background-position: 200% 0;
+      }
+  }

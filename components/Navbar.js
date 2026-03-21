@@ -30,6 +30,9 @@ export default function Navbar() {
                       <a className="nav-link" href="/blog">My Bolg</a>
                     </li>
                     <li className="nav-item">
+                      <a className="nav-link" href="/skeleton">Skeleton</a>
+                    </li>
+                    <li className="nav-item">
                       <a className="nav-link" href="/login">Login</a>
                     </li>
                 </ul>
