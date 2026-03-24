@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function PaginationPage() {
-  const items = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [data, setData] = useState([]);
 
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(
+            "https://jsonplaceholder.typicode.com/todos?_limit=100"
+            );
+            const result = await res.json();
+            setData(result);
+        };
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+        fetchData();
+    }, []);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
+    // ✅ FIX HERE
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentItems = data.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="container">
@@ -19,12 +31,11 @@ export default function PaginationPage() {
           <h2 className="text-primary">Display a list of 100 items with 10 items per page and page navigation.</h2>
         </div>
         <div className="box shadow p-4 mt-3">
-
-            <ul>
-                {currentItems.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
+            {currentItems.map((item) => (
+                <div key={item.id}>
+                {item.title} - {item.completed ? "✅" : "❌"}
+                </div>
+            ))}
 
             <div>
                 {Array.from({ length: totalPages }, (_, i) => (
