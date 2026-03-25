@@ -14,73 +14,42 @@
   return Response.json({ reply });
 }*/
 
-/* OPEN API */
+/* OpenRouter API */
 
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+const client = new OpenAI({
+  baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.OPENROUTER_API_KEY,
 });
 
 export async function POST(req) {
-
   try {
+    const { message } = await req.json();
 
-    const body = await req.json();
-    const message = body.message;
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+    const completion = await client.chat.completions.create({
+      model: "openai/gpt-3.5-turbo", // free/cheap models available
       messages: [
-        { role: "user", content: message }
-      ]
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: message },
+      ],
     });
 
     return Response.json({
-      reply: completion.choices[0].message.content
+      reply: completion.choices[0].message.content,
     });
 
   } catch (error) {
-
-    console.error("API ERROR:", error);
+    console.error(error);
 
     if (error.status === 429) {
       return Response.json({
-        reply: "AI service limit reached. Please try again later."
+        reply: "⚠️ Free limit reached. Try again later.",
       });
     }
 
     return Response.json({
-      reply: "Server error occurred."
+      reply: "Server error",
     });
-
   }
-
 }
-
-/*
-Huggingface API
-export async function POST(req) {
-
-  const { message } = await req.json();
-
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.HF_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        inputs: message
-      })
-    }
-  );
-
-  const data = await response.json();
-
-  return Response.json({
-    reply: data.generated_text || "No response"
-  });
-}*/
